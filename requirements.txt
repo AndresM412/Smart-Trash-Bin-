@@ -1,0 +1,14 @@
+# --- IA y APIs ---
+openai==0.28.1       # Usado para Whisper y GPT-3.5
+python-dotenv        # Para gestionar el archivo .env de forma segura
+
+# --- Control de Hardware (Raspberry Pi) ---
+gpiozero             # Control de servos de alto nivel
+pigpio               # Requerido por PiGPIOFactory para control remoto
+RPi.GPIO             # Control básico de pines para el sensor ultrasónico
+
+# --- Procesamiento de Audio ---
+sounddevice          # Grabación de audio desde el micrófono
+numpy                # Manejo de arreglos de datos de audio
+scipy                # Para guardar el archivo .wav
+pydub                # Reproducción y manipulación de archivos MP3/WAV

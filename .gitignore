@@ -1,0 +1,5 @@
+**/.env
+__pycache__/
+Peticiones/peticion.wav
+*.pyc
+.DS_Store
