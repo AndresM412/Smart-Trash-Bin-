@@ -1,31 +1,48 @@
 🗑️ Smart Bin: Clasificación de Residuos con GenAI
-Proyecto de hardware e inteligencia artificial que utiliza una Raspberry Pi y los modelos de OpenAI para automatizar la separación de residuos (Orgánicos e Inorgánicos) mediante comandos de voz.
+Este proyecto integra hardware (Raspberry Pi) con servicios de Inteligencia Artificial (OpenAI) para crear una papelera inteligente capaz de clasificar residuos mediante comandos de voz.
 
-🧠 ¿Cómo funciona?
-Detección: Un sensor ultrasónico detecta la presencia de un usuario a menos de 30 cm.
+🚀 Descripción del Proyecto
+El sistema automatiza el proceso de reciclaje eliminando la duda del usuario sobre dónde depositar un residuo. Utiliza un sensor de proximidad para iniciar la interacción, captura audio, lo transcribe y utiliza un modelo de lenguaje para tomar la decisión de apertura de compuertas.
 
-Interacción: El sistema saluda al usuario y graba un clip de voz con el residuo que desea depositar.
+🧠 Flujo de Trabajo (Pipeline)
+Detección de Presencia: El sensor ultrasónico HC-SR04 monitorea objetos a menos de 30 cm.
 
-Procesamiento (IA):
+Captura de Voz: El sistema reproduce un saludo (Bienvenido.mp3) y graba la petición del usuario (peticion.wav).
 
-Whisper API: Convierte el audio (.wav) a texto.
+Procesamiento de Lenguaje (NLP):
 
-GPT-3.5 Turbo: Analiza el texto y clasifica el objeto como "orgánico" o "inorgánico".
+STT (Speech-to-Text): Se utiliza OpenAI Whisper para transcribir el audio a texto.
 
-Acción: Según la respuesta de la IA, se activa uno de los dos servomotores para abrir la compuerta correspondiente.
+Razonamiento: Un prompt especializado en GPT-3.5 Turbo analiza la transcripción y clasifica el residuo estrictamente como "orgánico" o "inorgánico".
+
+Ejecución Física: Dependiendo de la clasificación, se activa uno de los dos servomotores para abrir la tapa correspondiente.
 
 🛠️ Stack Tecnológico
-Lenguaje: Python 3.x
+Lenguaje: Python 3.x.
 
-Hardware: Raspberry Pi 4, Sensor HC-SR04, Servomotores SG90.
+Hardware: Raspberry Pi, Sensor Ultrasónico HC-SR04, Servomotores SG90.
 
-APIs: OpenAI (Whisper & Chat Completions).
+IA & APIs: OpenAI API (Whisper-1 & GPT-3.5-Turbo).
 
-Librerías principales: gpiozero, sounddevice, pydub, python-dotenv.
+Librerías: gpiozero, openai, sounddevice, pydub, python-dotenv.
 
-📂 Estructura del Proyecto
-/src: Contiene la lógica del sensor, control de motores y conexión con la API.
+📂 Estructura de Archivos
+src/: Contiene los módulos de control de sensores, motores y lógica de IA.
 
-/assets: Archivos de audio de bienvenida y muestras de peticiones.
+assets/: Archivos multimedia (audio de bienvenida y muestras de voz).
 
-/config: Gestión de variables de entorno (API Keys).
+config/: Configuración de entorno y seguridad (API Keys).
+
+🔧 Configuración
+Para replicar este proyecto:
+
+Instala las dependencias: pip install -r requirements.txt.
+
+Configura tus credenciales en un archivo .env:
+
+Fragmento de código
+OPENAI_API_KEY=tu_api_key_aqui
+PIGPIO_HOST=tu_ip_raspberry
+Ejecuta el orquestador: python src/Ejecutar_Papelera.py.
+
+Nota: Este proyecto fue desarrollado con fines educativos y de investigación en la integración de IoT con modelos de lenguaje de gran escala (LLMs).
